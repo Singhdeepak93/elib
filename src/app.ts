@@ -1,17 +1,18 @@
 import express from 'express';
 import createHttpError from 'http-errors';
 import { globalErrorHandler } from './middlewares/globalErrorHandler';
+import  userRouter  from './user/userRouter';
 
 
 const app = express();
 
 //Router
 app.get(`/`,(req,res,next)=>{
-    const error = createHttpError(400,"something went wrong")
-    throw error;
     res.json({message:"Server will start"});
    
 })
+
+app.use('/api/users', userRouter);
 
 
 
