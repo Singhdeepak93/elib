@@ -4,7 +4,7 @@
   "description": "This is EBook Rest Api Build",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.ts"
   },
   "author": "Deepak Singh",
   "license": "ISC",
