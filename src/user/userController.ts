@@ -61,8 +61,8 @@ const loginUser = async (req: Request,res: Response,next:NextFunction) =>{
         return next(error);
     }
     //Database call
-     
-    
+     try {
+        
         const user = await userModal.findOne({email});
     if(!user){
         const error = createHttpError(404,"user not Found");
@@ -76,6 +76,11 @@ const loginUser = async (req: Request,res: Response,next:NextFunction) =>{
    //token generation
         const token = sign({sub:user._id}, config.jwtSecret as string, {expiresIn: '7d'});
           res.json({accessToken: token});
+        
+     } catch (error) {
+        return next(createHttpError(500,'Error while loging the user'));
+     }
+    
      
 }
 
