@@ -28,6 +28,6 @@ bookRouter.patch('/:bookId', authenticate ,upload.fields([
 
 bookRouter.get('/', AllBookList);
 bookRouter.get('/:bookId', SingleBookList);
-bookRouter.get('/:bookId', deleteBook);
+bookRouter.delete('/:bookId', authenticate, deleteBook);
 
 export default bookRouter;
