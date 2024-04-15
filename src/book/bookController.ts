@@ -139,12 +139,42 @@ const updateBook = async(req: Request,res: Response,next:NextFunction) =>{
 };
 
 const AllBookList = async(req: Request,res: Response,next:NextFunction)=>{
-  const AllList = await bookModel.find();
-  res.json(AllList);
+
   try {
-    
+    const AllList = await bookModel.find();
+    res.json(AllList);
   } catch (error) {
     return next(createHttpError(500, "Error while getting AllBookList"));
+  }
+
+};
+
+const SingleBookList = async(req: Request,res: Response,next:NextFunction)=>{
+
+  try {
+    const bookId= req.params.bookId;
+    const SingleList = await bookModel.findOne({_id:bookId});
+    if(!SingleList){
+      return next(createHttpError(404, " SingleBook not found"));
+    }
+ 
+   return  res.json(SingleList);
+   
+  } catch (error) {
+    return next(createHttpError(500, "Error while getting SingleBook"));
+  }
+
+};
+
+const deleteBook = async(req: Request,res: Response,next:NextFunction)=>{
+
+  try {
+    const bookId= req.params.bookId;
+    const SingleList = await bookModel.findOne({_id:bookId});
+    res.json(SingleList);
+    
+  } catch (error) {
+    return next(createHttpError(500, "Error while getting SingleBook"));
   }
 
 }
@@ -153,4 +183,4 @@ const AllBookList = async(req: Request,res: Response,next:NextFunction)=>{
 
 
 
-export {createBook, updateBook,AllBookList};
+export {createBook, updateBook,AllBookList,SingleBookList,deleteBook};
